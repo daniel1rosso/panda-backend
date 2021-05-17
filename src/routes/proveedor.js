@@ -3,7 +3,7 @@ const router = express.Router();
 const ProveedorModel = require('../models/ProveedorModel');
 const checkAuth = require('../middleware/checkAuth');
 
-//--- Todos los clientes ---//
+//--- Todos los proveedor ---//
 router.get('/', checkAuth, async(req, res) => {
     try {
         const proveedores = await ProveedorModel.find();
@@ -14,7 +14,7 @@ router.get('/', checkAuth, async(req, res) => {
 });
 
 //--- Nuevo Proveedor ---//
-router.post('/new_proveedor', async(req, res) => {
+router.post('/new_proveedor', checkAuth, async(req, res) => {
     try {
         const existingProveedor = await ProveedorModel.find({ nombre: req.body.nombre, apellido: req.body.apellido })
         if (existingProveedor.length !== 0) {

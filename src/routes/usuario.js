@@ -16,7 +16,7 @@ router.get('/', checkAuth, async(req, res) => {
 });
 
 //--- Nuevo usuario ---//
-router.post('/signup', async(req, res) => {
+router.post('/signup', checkAuth, async(req, res) => {
     try {
         const existingUser = await UsuarioModel.find({ username: req.body.username })
         if (existingUser.length !== 0) {

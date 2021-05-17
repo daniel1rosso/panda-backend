@@ -14,7 +14,7 @@ router.get('/', checkAuth, async(req, res) => {
 });
 
 //--- Nuevo cliente ---//
-router.post('/new_cliente', async(req, res) => {
+router.post('/new_cliente', checkAuth, async(req, res) => {
     try {
         const existingCliente = await ClienteModel.find({ nombre: req.body.nombre, apellido: req.body.apellido })
         if (existingCliente.length !== 0) {

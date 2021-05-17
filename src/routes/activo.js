@@ -14,7 +14,7 @@ router.get('/', checkAuth, async(req, res) => {
 });
 
 //--- Nuevo usuario ---//
-router.post('/new_activo', async(req, res) => {
+router.post('/new_activo', checkAuth, async(req, res) => {
     try {
         const existingActivo = await ActivoModel.find({ nombre: req.body.nombre })
         if (existingActivo.length !== 0) {

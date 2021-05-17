@@ -6,15 +6,15 @@ const checkAuth = require('../middleware/checkAuth');
 //--- Todos los clientes ---//
 router.get('/', checkAuth, async(req, res) => {
     try {
-        const proveedores = await ProductoModel.find();
-        res.status(201).json(proveedores);
+        const producto = await ProductoModel.find();
+        res.status(201).json(producto);
     } catch (error) {
         res.status(500).json({ message: error })
     }
 });
 
 //--- Nuevo Producto ---//
-router.post('/new_producto', async(req, res) => {
+router.post('/new_producto', checkAuth, async(req, res) => {
     try {
         const existingProducto = await ProductoModel.find({ nombre: req.body.nombre, apellido: req.body.apellido })
         if (existingProducto.length !== 0) {

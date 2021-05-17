@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Activo = require('./Activo');
 
 const UsuarioSchema = mongoose.Schema({
     apellido: String,

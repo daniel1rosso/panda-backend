@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Activo = require('./Activo');
 
 const ClienteSchema = mongoose.Schema({
     apellido: String,
@@ -14,7 +13,7 @@ const ClienteSchema = mongoose.Schema({
     depto: String,
     localidad: Number,
     provincia: Number,
-    activo: Activo,
+    activo: Array,
     created: { type: Date, default: Date.now }
 })
 
