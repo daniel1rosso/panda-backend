@@ -13,6 +13,7 @@ const UsuarioSchema = mongoose.Schema({
     localidad: Number,
     provincia: Number,
     activo: Array,
+    rol: Array,
     created: { type: Date, default: Date.now }
 })
 

@@ -16,6 +16,7 @@ const activoRoute = require('./routes/activo');
 const clienteRoute = require('./routes/cliente');
 const productoRoute = require('./routes/producto');
 const proveedorRoute = require('./routes/proveedor');
+const rolRoute = require('./routes/rol');
 const userRoute = require('./routes/usuario');
 
 //INIT ROUTE
@@ -23,6 +24,7 @@ app.use('/activo', activoRoute);
 app.use('/cliente', clienteRoute);
 app.use('/producto', productoRoute);
 app.use('/proveedor', proveedorRoute);
+app.use('/rol', rolRoute);
 app.use('/usuario', userRoute);
 
 //START SERVER

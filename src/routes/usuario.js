@@ -35,6 +35,10 @@ router.post('/signup', checkAuth, async(req, res) => {
             activo: {
                 "id": 0,
                 "nombre": "Activo"
+            },
+            rol: {
+                "id": 0,
+                "nombre": "SuperAdmin"
             }
         });
         const createdUser = await user.save();
