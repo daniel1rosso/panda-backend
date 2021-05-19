@@ -32,13 +32,14 @@ router.post('/signup', checkAuth, async(req, res) => {
             password: hashPassword,
             localidad: req.body.localidad,
             provincia: req.body.provincia,
+            dni: req.body.dni,
             activo: {
                 "id": 0,
                 "nombre": "Activo"
             },
             rol: {
-                "id": 0,
-                "nombre": "SuperAdmin"
+                "id": 2,
+                "nombre": "Usuario"
             }
         });
         const createdUser = await user.save();
@@ -102,11 +103,17 @@ const verifyPassword = (user, req, res) => {
 
 //--- Generacion de Token ---//
 const getToken = (user, res) => {
+    let usuario = {
+        "id":user._id,
+        "username": user.username,
+        "rol": user.rol
+    }
     const token = jwt.sign({ username: user.username, userId: user._id, },
         Math.random().toString(36).substring(0,20), { expiresIn: "1h" })
     res.json({
         message: "Auth successful",
-        token: token
+        token: token,
+        user: usuario
     });
 }
 
