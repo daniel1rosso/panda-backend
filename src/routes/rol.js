@@ -4,7 +4,7 @@ const RolModel = require('../models/RolModel');
 const checkAuth = require('../middleware/checkAuth');
 
 //--- Todos los roles ---//
-router.get('/', checkAuth, async(req, res) => {
+router.get('/', async(req, res) => {
     try {
         const roles = await RolModel.find();
         res.status(201).json(roles);
