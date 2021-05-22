@@ -110,7 +110,7 @@ const getToken = (user, res) => {
         token: token,
         "id":user._id,
         "username": user.username,
-        "authorities": user.rol[0].nombre
+        "authorities": user.rol
     });
 }
 
