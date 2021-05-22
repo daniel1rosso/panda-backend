@@ -103,17 +103,14 @@ const verifyPassword = (user, req, res) => {
 
 //--- Generacion de Token ---//
 const getToken = (user, res) => {
-    let usuario = {
-        "id":user._id,
-        "username": user.username,
-        "rol": user.rol
-    }
     const token = jwt.sign({ username: user.username, userId: user._id, },
         Math.random().toString(36).substring(0,20), { expiresIn: "1h" })
     res.json({
         message: "Auth successful",
         token: token,
-        user: usuario
+        "id":user._id,
+        "username": user.username,
+        "authorities": user.rol
     });
 }
 
