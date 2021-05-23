@@ -80,10 +80,10 @@ router.post('/login', (req, res) => {
                 if(user.activo[0].id == 0) {
                     verifyPassword(user, req, res)
                 } else {
-                    res.status(500).json({ message: "Inactive user" })
+                    res.status(500).json({ message: "Inactive user" , success: 0})
                 }
             } else {
-                res.json({ message: "Incorrect username or password..." })
+                res.json({ message: "Incorrect username or password...",  success: 0 })
             }
         }).catch(error => {
             res.status(500).json({ message: `error : ${error}` })
@@ -96,7 +96,7 @@ const verifyPassword = (user, req, res) => {
         if (err) return res.status(500).json({ message: err })
         else {
             if (result) return getToken(user, res)
-            else return res.json({ message: "Authentication failed ..." })
+            else return res.json({ message: "Authentication failed ...",  success: 0 })
         }
     })
 }
@@ -106,6 +106,7 @@ const getToken = (user, res) => {
     const token = jwt.sign({ username: user.username, userId: user._id, },
         Math.random().toString(36).substring(0,20), { expiresIn: "1h" })
     res.json({
+        success: 1,
         message: "Auth successful",
         token: token,
         "id":user._id,
