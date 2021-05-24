@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const cors = require('cors')
+const swaggerUi = require('swagger-ui-express');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,6 +20,7 @@ const proveedorRoute = require('./routes/proveedor');
 const rolRoute = require('./routes/rol');
 const userRoute = require('./routes/usuario');
 
+//Documentation
 //INIT ROUTE
 app.use('/activo', activoRoute);
 app.use('/cliente', clienteRoute);
