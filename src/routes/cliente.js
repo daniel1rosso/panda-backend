@@ -30,7 +30,8 @@ router.post('/new_cliente', async(req, res) => {
             depto: req.body.depto,
             localidad: req.body.localidad,
             provincia: req.body.provincia,
-            activo: Activo,
+            activo: req.body.activo,
+	    dni:req.body.dni
         });
         const createdCliente = await cliente.save();
         res.status(201).json(createdCliente);
@@ -40,7 +41,7 @@ router.post('/new_cliente', async(req, res) => {
 });
 
 //--- Actualizacion de cliente ---//
-router.put('/:cliente_id', checkAuth, (req, res) => {
+router.put('/:cliente_id', (req, res) => {
     ClienteModel.updateMany({ _id: req.params.cliente_id }, { $set: req.body }).exec()
         .then(() => {
             res.json(req.body)
@@ -50,7 +51,7 @@ router.put('/:cliente_id', checkAuth, (req, res) => {
 });
 
 //--- Borrado de cliente ---//
-router.delete('/:clienteID', checkAuth, async(req, res) => {
+router.delete('/:clienteID', async(req, res) => {
     try {
         const deleteCliente = await ClienteModel.deleteOne({ _id: req.params.clienteID })
         res.status(200).json({

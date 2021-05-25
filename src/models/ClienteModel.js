@@ -14,7 +14,7 @@ const ClienteSchema = mongoose.Schema({
     localidad: Number,
     provincia: Number,
     dni:  { type: Number, required: true },
-    activo: Array,
+    activo: Number,
     created: { type: Date, default: Date.now }
 })
 
