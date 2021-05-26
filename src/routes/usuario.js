@@ -117,4 +117,10 @@ const getToken = (user, res) => {
     });
 }
 
+//--- Logout al sistema ---//
+router.post('/logout', checkAuth, (req, res) => {
+    process.env.token = ""
+    res.json({ message: "Logout Successful...",  success: 0 })
+});
+
 module.exports = router;

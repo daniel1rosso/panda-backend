@@ -31,7 +31,7 @@ router.post('/new_cliente', checkAuth, async(req, res) => {
             localidad: req.body.localidad,
             provincia: req.body.provincia,
             activo: req.body.activo,
-	    dni:req.body.dni
+	        dni:req.body.dni
         });
         const createdCliente = await cliente.save();
         res.status(201).json(createdCliente);
