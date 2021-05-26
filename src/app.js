@@ -7,6 +7,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
 
+//Documentation
 const cors = require('cors');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -25,8 +26,6 @@ const productoRoute = require('./routes/producto');
 const proveedorRoute = require('./routes/proveedor');
 const rolRoute = require('./routes/rol');
 const userRoute = require('./routes/usuario');
-
-//Documentation
 
 //INIT ROUTE
 app.use('/activo', activoRoute);
