@@ -13,6 +13,16 @@ router.get('/', checkAuth, async(req, res) => {
     }
 });
 
+//--- Datos de un cliente ---//
+router.get('/:cliente_id', checkAuth, async(req, res) => {
+    try {
+        const cliente = await ClienteModel.find({ _id: req.params.cliente_id });
+        res.status(201).json(cliente);
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+});
+
 //--- Nuevo cliente ---//
 router.post('/new_cliente', checkAuth, async(req, res) => {
     try {

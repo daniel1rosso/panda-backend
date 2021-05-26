@@ -13,6 +13,16 @@ router.get('/', checkAuth, async(req, res) => {
     }
 });
 
+//--- Datos de un proveedor ---//
+router.get('/:proveedor_id', checkAuth, async(req, res) => {
+    try {
+        const proveedor = await ProveedorModel.find({ _id: req.params.proveedor_id });
+        res.status(201).json(proveedor);
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+});
+
 //--- Nuevo Proveedor ---//
 router.post('/new_proveedor', checkAuth, async(req, res) => {
     try {

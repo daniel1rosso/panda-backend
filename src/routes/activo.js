@@ -13,6 +13,16 @@ router.get('/', checkAuth, async(req, res) => {
     }
 });
 
+//--- Datos de un activo ---//
+router.get('/:activo_id', checkAuth, async(req, res) => {
+    try {
+        const activo = await ActivoModel.find({ _id: req.params.activo_id });
+        res.status(201).json(activo);
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+});
+
 //--- Nuevo usuario ---//
 router.post('/new_activo', checkAuth, async(req, res) => {
     try {

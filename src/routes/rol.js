@@ -13,6 +13,16 @@ router.get('/', async(req, res) => {
     }
 });
 
+//--- Datos de un rol ---//
+router.get('/:rol_id', checkAuth, async(req, res) => {
+    try {
+        const rol = await RolModel.find({ _id: req.params.rol_id });
+        res.status(201).json(rol);
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+});
+
 //--- Nuevo rol ---//
 router.post('/new_rol', checkAuth, async(req, res) => {
     try {

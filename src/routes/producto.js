@@ -6,7 +6,17 @@ const checkAuth = require('../middleware/checkAuth');
 //--- Todos los clientes ---//
 router.get('/', checkAuth, async(req, res) => {
     try {
-        const producto = await ProductoModel.find();
+        const productos = await ProductoModel.find();
+        res.status(201).json(productos);
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+});
+
+//--- Datos de un producto ---//
+router.get('/:producto_id', checkAuth, async(req, res) => {
+    try {
+        const producto = await ProductoModel.find({ _id: req.params.producto_id });
         res.status(201).json(producto);
     } catch (error) {
         res.status(500).json({ message: error })
