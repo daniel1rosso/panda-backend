@@ -15,6 +15,16 @@ router.get('/', checkAuth, async(req, res) => {
     }
 });
 
+//--- Datos de un usuario ---//
+router.get('/:user_id', checkAuth, async(req, res) => {
+    try {
+        const user = await UsuarioModel.find({ _id: req.params.user_id });
+        res.status(201).json(user);
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+});
+
 //--- Nuevo usuario ---//
 router.post('/signup', async(req, res) => {
     try {
