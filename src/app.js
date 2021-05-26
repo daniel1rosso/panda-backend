@@ -3,8 +3,14 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
 const bodyParser = require('body-parser');
-const cors = require('cors')
 const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
+
+const cors = require('cors');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -21,6 +27,7 @@ const rolRoute = require('./routes/rol');
 const userRoute = require('./routes/usuario');
 
 //Documentation
+
 //INIT ROUTE
 app.use('/activo', activoRoute);
 app.use('/cliente', clienteRoute);
@@ -31,3 +38,4 @@ app.use('/usuario', userRoute);
 
 //START SERVER
 app.listen(8000);
+
