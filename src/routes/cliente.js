@@ -4,7 +4,7 @@ const ClienteModel = require('../models/ClienteModel');
 const checkAuth = require('../middleware/checkAuth');
 
 //--- Todos los clientes ---//
-router.get('/', async(req, res) => {
+router.get('/', checkAuth, async(req, res) => {
     try {
         const clientes = await ClienteModel.find();
         res.status(201).json(clientes);
