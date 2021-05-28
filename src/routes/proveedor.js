@@ -26,7 +26,7 @@ router.get('/:proveedor_id', checkAuth, async(req, res) => {
 //--- Nuevo Proveedor ---//
 router.post('/new_proveedor', checkAuth, async(req, res) => {
     try {
-        const existingProveedor = await ProveedorModel.find({ nombre: req.body.nombre, apellido: req.body.apellido })
+        const existingProveedor = await ProveedorModel.find({ nombre_empresa: req.body.nombre_empresa })
         if (existingProveedor.length !== 0) {
             return res.status(409).json({ message: "The Proveedor does exist ..." })
         }
@@ -40,7 +40,7 @@ router.post('/new_proveedor', checkAuth, async(req, res) => {
             depto: req.body.depto,
             localidad: req.body.localidad,
             provincia: req.body.provincia,
-            activo: Activo,
+            activo: req.body.activo,
         });
         const createdProveedor = await proveedor.save();
         res.status(201).json(createdProveedor);
