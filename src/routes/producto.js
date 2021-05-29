@@ -26,21 +26,20 @@ router.get('/:producto_id', checkAuth, async(req, res) => {
 //--- Nuevo Producto ---//
 router.post('/new_producto', checkAuth, async(req, res) => {
     try {
-        const existingProducto = await ProductoModel.find({ nombre: req.body.nombre, apellido: req.body.apellido })
+        const existingProducto = await ProductoModel.find({ nombre: req.body.nombre})
         if (existingProducto.length !== 0) {
             return res.status(409).json({ message: "The Producto does exist ..." })
         }
         const producto = new ProductoModel({
-            nombre_empresa: req.body.nombre_empresa,
-            telefono: req.body.telefono,
-            email: req.body.email,
-            web: req.body.web,
-            direccion: req.body.direccion,
-            nro_piso: req.body.nro_piso,
-            depto: req.body.depto,
-            localidad: req.body.localidad,
-            provincia: req.body.provincia,
-            activo: Activo,
+            nombre: req.body.nombre,
+            codigo: req.body.codigo,
+            cantidad: req.body.cantidad,
+            descripcion: req.body.descripcion,
+            proveedor: req.body.proveedor,
+            activo: req.body.activo,
+            costo: req.body.costo,
+            precio_venta: req.body.precio_venta,
+           
         });
         const createdProducto = await producto.save();
         res.status(201).json(createdProducto);
