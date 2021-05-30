@@ -6,12 +6,9 @@ const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
-
 //Documentation
 const cors = require('cors');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -26,6 +23,8 @@ const productoRoute = require('./routes/producto');
 const proveedorRoute = require('./routes/proveedor');
 const rolRoute = require('./routes/rol');
 const userRoute = require('./routes/usuario');
+const ventaRoute = require('./routes/venta');
+const ventaDetalleRoute = require('./routes/venta_detalle');
 
 //INIT ROUTE
 app.use('/activo', activoRoute);
@@ -34,7 +33,8 @@ app.use('/producto', productoRoute);
 app.use('/proveedor', proveedorRoute);
 app.use('/rol', rolRoute);
 app.use('/usuario', userRoute);
-
+app.use('/venta', ventaRoute);
+app.use('/venta_detalle', ventaDetalleRoute);
 //START SERVER
 app.listen(8000);
 

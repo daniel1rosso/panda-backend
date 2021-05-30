@@ -76,9 +76,7 @@
         }
       }
     },
-
     "definitions": {
-
       "User": {
         "properties": {
           "email": {
@@ -96,7 +94,6 @@
           }
         }
       }
-
 
 
     }
