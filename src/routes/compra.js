@@ -6,8 +6,8 @@ const checkAuth = require('../middleware/checkAuth');
 //--- Todos las compras ---//
 router.get('/', checkAuth, async(req, res) => {
     try {
-        const ventas = await CompraModel.find();
-        res.status(201).json(ventas);
+        const compras = await CompraModel.find();
+        res.status(201).json(compras);
     } catch (error) {
         res.status(500).json({ message: error })
     }

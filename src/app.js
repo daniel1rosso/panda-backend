@@ -35,6 +35,6 @@ app.use('/rol', rolRoute);
 app.use('/usuario', userRoute);
 app.use('/venta', ventaRoute);
 app.use('/venta_detalle', ventaDetalleRoute);
+
 //START SERVER
 app.listen(8000);
-
