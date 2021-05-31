@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const VentaSchema = mongoose.Schema({
-    cliente: { type: Number, required: true },
+    cliente: { type: Array, required: true },
     total: { type: Number, required: true },
     descuento: Number,
     fecha: Date,

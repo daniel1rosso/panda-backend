@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const VentaDetalleSchema = mongoose.Schema({
-    producto: { type: Number, required: true },
+    producto: { type: Array, required: true },
     cantidad: { type: Number, required: true },
     precio: { type: Number, required: true },
     descuento: Number,

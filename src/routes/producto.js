@@ -3,7 +3,7 @@ const router = express.Router();
 const ProductoModel = require('../models/ProductoModel');
 const checkAuth = require('../middleware/checkAuth');
 
-//--- Todos los clientes ---//
+//--- Todos los productos ---//
 router.get('/', checkAuth, async(req, res) => {
     try {
         const productos = await ProductoModel.find();
