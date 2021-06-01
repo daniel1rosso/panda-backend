@@ -14,7 +14,7 @@ router.get('/:venta_id', checkAuth, async(req, res) => {
 });
 
 //--- Nuevo detalle de venta ---//
-router.post('/new_venta_detalle/:venta_id', async(req, res) => {
+router.post('/new_venta_detalle/:venta_id', checkAuth, async(req, res) => {
     try {
         const venta_detalle = new VentaDetalleModel({
             producto: req.body.producto,

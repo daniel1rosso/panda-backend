@@ -3,6 +3,48 @@ const router = express.Router();
 const ProductoModel = require('../models/ProductoModel');
 const checkAuth = require('../middleware/checkAuth');
 
+//--- Stock total de los productos ---//
+router.get('/stock/', checkAuth, async(req, res) => {
+    try {
+        const productos = await ProductoModel.find();
+        stock = 0;
+        productos.forEach(element => {
+            stock += element.cantidad
+        });
+        res.status(201).json(stock);
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+});
+
+//--- Total costo de los productos ---//
+router.get('/total_costo/', checkAuth, async(req, res) => {
+    try {
+        const productos = await ProductoModel.find();
+        costo = 0;
+        productos.forEach(element => {
+            costo += element.costo
+        });
+        res.status(201).json(costo);
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+});
+
+//--- Total costo de los productos ---//
+router.get('/total_venta/', checkAuth, async(req, res) => {
+    try {
+        const productos = await ProductoModel.find();
+        total_venta = 0;
+        productos.forEach(element => {
+            total_venta += element.total_venta
+        });
+        res.status(201).json(total_venta);
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+});
+
 //--- Todos los productos ---//
 router.get('/', checkAuth, async(req, res) => {
     try {
