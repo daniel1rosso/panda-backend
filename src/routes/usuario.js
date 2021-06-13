@@ -113,9 +113,9 @@ const verifyPassword = (user, req, res) => {
 
 //--- Generacion de Token ---//
 const getToken = (user, res) => {
-    const token = jwt.sign({ username: user.username, userId: user._id, },
+    const token = jwt.sign({ userId: user._id, },
         Math.random().toString(36).substring(0,20))
-        process.env.token = token
+        user.token = user.tokens.concat({token});
     res.json({
         success: 1,
         message: "Auth successful",
