@@ -112,7 +112,7 @@ const verifyPassword = (user, req, res) => {
 }
 
 //--- Generacion de Token ---//
-const getToken = (user, res) => {
+const getToken = async (user, res) => {
     const token = jwt.sign({ userId: user._id, },
         Math.random().toString(36).substring(0,20))
         user.token = user.tokens.concat({token});
