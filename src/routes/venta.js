@@ -24,7 +24,7 @@ router.get('/:venta_id', checkAuth, async(req, res) => {
 });
 
 //--- Nueva venta ---//
-router.post('/new_venta', checkAuth, async(req, res) => {
+router.post('/new_venta', async(req, res) => {
     try {
         const venta = new VentaModel({
             cliente: req.body.cliente,
