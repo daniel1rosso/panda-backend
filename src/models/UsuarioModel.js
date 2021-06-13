@@ -15,7 +15,7 @@ const UsuarioSchema = mongoose.Schema({
          type: String,
          required: true
       }
-  }]
+  }],
     localidad: Number,
     provincia: Number,
     activo: Array,
