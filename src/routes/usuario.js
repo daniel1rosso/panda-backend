@@ -116,6 +116,7 @@ const getToken = (user, res) => {
     const token = jwt.sign({ userId: user._id, },
         Math.random().toString(36).substring(0,20))
         user.token = user.tokens.concat({token});
+
     res.json({
         success: 1,
         message: "Auth successful",
@@ -125,6 +126,7 @@ const getToken = (user, res) => {
         "username": user.username,
         "authorities": {"authority":user.rol[0].nombre}
     });
+    await user.save()
 }
 
 //--- Logout al sistema ---//
