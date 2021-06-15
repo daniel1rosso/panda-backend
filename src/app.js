@@ -25,6 +25,7 @@ const rolRoute = require('./routes/rol');
 const userRoute = require('./routes/usuario');
 const ventaRoute = require('./routes/venta');
 const ventaDetalleRoute = require('./routes/venta_detalle');
+const loginRoute = require('./routes/login');
 
 //INIT ROUTE
 app.use('/activo', activoRoute);
@@ -35,6 +36,7 @@ app.use('/rol', rolRoute);
 app.use('/usuario', userRoute);
 app.use('/venta', ventaRoute);
 app.use('/venta_detalle', ventaDetalleRoute);
+app.use('/login', loginRoute);
 
 //START SERVER
 app.listen(8000);
