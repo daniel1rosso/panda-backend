@@ -66,7 +66,11 @@ const getToken = (user, res) => {
 }
 
 //--- Logout al sistema ---//
-router.post('/logout', checkAuth, (req, res) => {
+router.post('/logout', checkAuth, async (req, res) => {
+    //-- Token Session --//
+    const token_session = req.headers.authorization.split(" ")[1];
+    const deletedSession = await LoginModel.deleteOne({ token: token_session })
+    const decoded = (deletedSession.length !== 0) ? true : false
     res.json({ message: "Logout Successful...",  success: 0 })
 });
 

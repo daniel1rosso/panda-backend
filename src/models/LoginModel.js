@@ -6,4 +6,4 @@ const LoginSchema = mongoose.Schema({
     created: { type: Date, default: Date.now }
 })
 
-module.exports = mongoose.model('login', LoginSchema);
+module.exports = mongoose.model('logins', LoginSchema);
