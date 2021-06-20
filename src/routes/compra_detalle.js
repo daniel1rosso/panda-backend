@@ -50,6 +50,7 @@ router.post('/new_compra_detalle/:compra_id', async(req, res) => {
 router.put('/:compra_detalle_id', checkAuth, async (req, res) => {
     const producto = req.body.producto
     const cantidad_detalle = req.body.cantidad
+    
     //-- Producto de la coleccion --//
     producto_collection = await ProductoModel.find({ _id: producto._id })
     compra_detalle = await CompraDetalleModel.find({ _id: req.params.compra_detalle_id });
@@ -62,6 +63,7 @@ router.put('/:compra_detalle_id', checkAuth, async (req, res) => {
     } else {
         cantidad_stock = cantidad_detalle
     }
+    
     //-- Asignacion del nuevo stock del producto --//
     (cantidad_detalle != compra_detalle.cantidad) ? producto.cantidad = cantidad_stock : "";
 
