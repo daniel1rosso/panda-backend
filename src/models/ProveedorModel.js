@@ -11,8 +11,8 @@ const ProveedorSchema = mongoose.Schema({
     direccion: String,
     nro_piso: String,
     depto: String,
-    localidad: Number,
-    provincia: Number,
+    localidad: Array,
+    provincia: Array,
     activo: Number,
     created: { type: Date, default: Date.now }
 })

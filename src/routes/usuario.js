@@ -32,7 +32,7 @@ router.post('/signup', async(req, res) => {
         if (existingUser.length !== 0) {
             return res.status(409).json({ message: "The User does exist ..." })
         }
-        const hashPassword = await bcrypt.hash(req.body.password, 10);
+        const hashPassword = bcrypt.hash(req.body.password, 10);
         const user = new UsuarioModel({
             nombre: req.body.nombre,
             apellido: req.body.apellido,
@@ -60,9 +60,9 @@ router.post('/signup', async(req, res) => {
 });
 
 //--- Actualizacion de usuario ---//
-router.put('/:user_id', checkAuth, (req, res) => {
+router.put('/:user_id', checkAuth, async (req, res) => {
     //-- Hash del password --//
-    const hashPassword = await bcrypt.hash(req.body.password, 10);
+    const hashPassword = bcrypt.hash(req.body.password, 10);
     //-- User de la bd --//
     const user = await UsuarioModel.find({ _id: req.params.user_id })
     //-- Asignacion de la password de ser ditinta --//

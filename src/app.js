@@ -28,6 +28,7 @@ const ventaDetalleRoute = require('./routes/venta_detalle');
 const compraRoute = require('./routes/compra');
 const compraDetalleRoute = require('./routes/compra_detalle');
 const loginRoute = require('./routes/login');
+const regionesRoute = require('./routes/regiones');
 
 //INIT ROUTE
 app.use('/activo', activoRoute);
@@ -41,6 +42,7 @@ app.use('/venta_detalle', ventaDetalleRoute);
 app.use('/compra', compraRoute);
 app.use('/compra_detalle', compraDetalleRoute);
 app.use('/login', loginRoute);
+app.use('/regiones', regionesRoute);
 
 //START SERVER
 app.listen(8000);
