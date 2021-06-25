@@ -32,7 +32,7 @@ const verifyPassword = (user, req, res) => {
             if (result) {
                 return getToken(user, res)
             } else {
-                return res.json({ message: "Authentication failed ...",  success: 0 })
+                return res.json({ message: "Contraseña incorrecta, vuelva a intentarlo",  success: 0 })
             }
         }
     })

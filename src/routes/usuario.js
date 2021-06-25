@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt')
 const UsuarioModel = require('../models/UsuarioModel');
-var jwt = require('jsonwebtoken');
 const checkAuth = require('../middleware/checkAuth');
 
 //--- Todos los usuarios ---//
@@ -62,12 +61,9 @@ router.post('/signup', async(req, res) => {
 //--- Actualizacion de usuario ---//
 router.put('/:user_id', checkAuth, async (req, res) => {
     //-- Hash del password --//
-    const hashPassword = bcrypt.hash(req.body.password, 10);
-    //-- User de la bd --//
-    const user = await UsuarioModel.find({ _id: req.params.user_id })
-    //-- Asignacion de la password de ser ditinta --//
-    (hashPassword != user.password) ? user.password = hashPassword : ""
-    UsuarioModel.updateMany({ _id: req.params.user_id }, { $set: req.body }).exec()
+    const hashPassword = await bcrypt.hash(req.body.password, 10)
+    req.body.password = hashPassword
+    await UsuarioModel.updateMany({ _id: req.params.user_id }, { $set: req.body }).exec()
         .then(() => {
             res.json(req.body)
         }).catch(err => {
