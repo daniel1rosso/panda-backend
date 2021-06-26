@@ -58,6 +58,7 @@ const getToken = (user, res) => {
             token: token,
             "id":user._id,
             "username": user.username,
+            "nombre": user.nombre,
             "authorities": {"authority":user.rol[0].nombre}
         });
     } else {
