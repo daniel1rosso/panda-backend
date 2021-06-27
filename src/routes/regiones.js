@@ -7,7 +7,7 @@ const checkAuth = require('../middleware/checkAuth');
 router.get('/', checkAuth, async (req, res) => {
     try {
         const regiones = await RegionesModel.find();
-        res.status(201).json(regiones[0].regions);
+        res.status(201).json(regiones);
     } catch (error) {
         res.status(500).json({ message: error })
     }
