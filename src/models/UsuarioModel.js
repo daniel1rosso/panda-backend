@@ -12,8 +12,8 @@ const UsuarioSchema = mongoose.Schema({
     password: { type: String, required: true },
     localidad: Number,
     provincia: Number,
-    activo: String,
-    rol: String,
+    activo: Array,
+    rol: Array,
     created: { type: Date, default: Date.now }
 })
 
