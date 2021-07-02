@@ -39,9 +39,9 @@ router.post('/signup', async(req, res) => {
             telefono: req.body.telefono,
             username: req.body.username,
             password: hashPassword,
-            localidad: req.body.localidad,
+            localidad: req.body.comuna,
             provincia: req.body.provincia,
-            dni: req.body.dni,
+           // dni: req.body.dni,
             activo: {
                 "id": 0,
                 "nombre": "Activo"
