@@ -38,7 +38,7 @@ router.post('/new_cliente', checkAuth, async(req, res) => {
             direccion: req.body.direccion,
             nro_piso: req.body.nro_piso,
             depto: req.body.depto,
-            localidad: req.body.localidad,
+            localidad: req.body.comuna,
             provincia: req.body.provincia,
             activo: req.body.activo,
 	        dni:req.body.dni
