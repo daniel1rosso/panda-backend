@@ -1,4 +1,6 @@
 const express = require('express');
+const fs = require('fs');
+const https = require('https');
 const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -15,7 +17,12 @@ app.use(bodyParser.json());
 
 //MONGODB CONNECTION
 require('./database');
-
+https.createServer({
+  key: fs.readFileSync('private.key'),
+  cert: fs.readFileSync('certificate.crt')
+}, app).listen(8000, function(){
+  console.log("My HTTPS server listening on port ");
+});
 //IMPORT ROUTE
 const activoRoute = require('./routes/activo');
 const clienteRoute = require('./routes/cliente');
@@ -45,4 +52,4 @@ app.use('/login', loginRoute);
 app.use('/provincia', provinciasRoute);
 
 //START SERVER
-app.listen(8000);
+//app.listen(8000);
