@@ -9,6 +9,7 @@ const ProductoSchema = mongoose.Schema({
     activo: Number,
     costo: Number,
     precio_venta: Number,
+    cantidad_stock: Number,
     created: { type: Date, default: Date.now }
 })
 

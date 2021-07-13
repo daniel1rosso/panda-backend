@@ -39,7 +39,7 @@ router.post('/new_producto', checkAuth, async(req, res) => {
             activo: req.body.activo,
             costo: req.body.costo,
             precio_venta: req.body.precio_venta,
-           
+            cantidad_stock: req.body.cantidadstock
         });
         const createdProducto = await producto.save();
         res.status(201).json(createdProducto);
