@@ -39,7 +39,7 @@ router.post('/new_producto', checkAuth, async(req, res) => {
             activo: req.body.activo,
             costo: req.body.costo,
             precio_venta: req.body.precio_venta,
-            cantidad_stock: req.body.cantidadstock
+            cantidad_stock: req.body.cantidad_stock
         });
         const createdProducto = await producto.save();
         res.status(201).json(createdProducto);
@@ -66,6 +66,22 @@ router.delete('/:productoID', checkAuth, async(req, res) => {
             message: 'Producto been deleted ...',
             data: deleteProducto,
         })
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+});
+
+//--- Productos faltantes ---/
+router.post('/productos_faltantes', checkAuth, async(req, res) => {
+    try {
+        const productos = await ProductoModel.find();
+        var productos_faltantes = []
+        productos.forEach(element => {
+            if (element.cantidad_stock >= element.cantidad) {
+                productos_faltantes.push(element)
+            }
+        })
+        res.status(201).json(productos_faltantes);
     } catch (error) {
         res.status(500).json({ message: error })
     }
