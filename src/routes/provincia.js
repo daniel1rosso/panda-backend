@@ -16,7 +16,7 @@ router.get('/provincias', checkAuth, async (req, res) => {
 router.get('/comunas/:provincia_id', checkAuth, async(req, res) => {
     try {
         const comunas = await ComunasModel.find({ provincia_id: req.params.provincia_id});
-        console.log(comunas)
+        
         res.status(201).json(comunas);
     } catch (error) {
         res.status(500).json({ message: error })

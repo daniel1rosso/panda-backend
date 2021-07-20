@@ -31,8 +31,10 @@ router.post('/signup', async(req, res) => {
         if (existingUser.length !== 0) {
             return res.status(409).json({ message: "The User does exist ..." })
         }
-        const hashPassword = bcrypt.hash(req.body.password, 10);
+        const hashPassword = await bcrypt.hash(req.body.password, 10);
+        
         const user = new UsuarioModel({
+            
             nombre: req.body.nombre,
             apellido: req.body.apellido,
             email: req.body.email,
@@ -51,6 +53,7 @@ router.post('/signup', async(req, res) => {
                 "nombre": "Usuario"
             }
         });
+      
         const createdUser = await user.save();
         res.status(201).json(createdUser);
     } catch (error) {
