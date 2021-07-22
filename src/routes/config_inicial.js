@@ -18,7 +18,7 @@ router.post('/new_configuracion_inicial', checkAuth, async(req, res) => {
     try {
         const configuracion_inicial = new ConfiguaracionInicialModel({
             razon_social: req.body.razon_social,
-            cuil: req.body.cuil,
+            cuit: req.body.cuit,
             direccion: req.body.direccion,
             telefono: req.body.telefono
         });
