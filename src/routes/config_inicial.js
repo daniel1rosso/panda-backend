@@ -4,7 +4,7 @@ const ConfiguaracionInicialModel = require('../models/ConfiguracionInicialModel'
 const checkAuth = require('../middleware/checkAuth');
 
 //--- Todas las configuraciones iniciales ---//
-router.get('/:config_id', checkAuth, async(req, res) => {
+router.get('/', checkAuth, async(req, res) => {
     try {
         const configuracion_inicial = await ConfiguaracionInicialModel.find();
         res.status(201).json(configuracion_inicial);
