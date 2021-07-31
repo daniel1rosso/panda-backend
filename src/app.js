@@ -15,6 +15,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors());
 app.use(bodyParser.json());
 
+//CREAR CARPETA STORAGE O VER DONDE GUARDAMOS LAS IMAGENES ----------------------------------------
+app.use('/public', express.static(`${__dirname}/storage/imgs`))
+
 //MONGODB CONNECTION
 require('./database');
 https.createServer({

@@ -41,6 +41,12 @@ router.post('/new_producto', checkAuth, async(req, res) => {
             precio_venta: req.body.precio_venta,
             cantidad_stock: req.body.cantidad_stock
         });
+
+        if(req.file){
+            const {filename} = req.file
+            producto.setImgUrl(filename)
+        }
+
         const createdProducto = await producto.save();
         res.status(201).json(createdProducto);
     } catch (error) {
