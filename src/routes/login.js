@@ -49,7 +49,7 @@ const getToken = (user, res) => {
         token: token
     });
     const createdSession = login.save();
-
+    
     if(createdSession) {
         res.json({
             success: 1,
@@ -60,9 +60,9 @@ const getToken = (user, res) => {
             "username": user.username,
             "nombre": user.nombre,
             "authorities": {"authority":user.rol[0].nombre}
-        });
+        })
     } else {
-        res.json({ message: "Authentication failed ...",  success: 0 })
+        res.json({ message: "Auth successful",  success: 1 })
     }
 }
 

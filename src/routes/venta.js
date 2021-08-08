@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const VentaModel = require('../models/VentaModel');
 const checkAuth = require('../middleware/checkAuth');
+const userLog = require('../middleware/userLog');
+const HistorialOperacionModel = require('../models/HistorialOperacionModel');
 
 //--- Todos los ventas ---//
 router.get('/', checkAuth, async(req, res) => {
@@ -24,8 +26,11 @@ router.get('/:venta_id', checkAuth, async(req, res) => {
 });
 
 //--- Nueva venta ---//
-router.post('/new_venta', async(req, res) => {
+router.post('/new_venta', checkAuth, userLog, async(req, res) => {
     try {
+        //--- User Logeado ---//
+        var userLogin = res.userlog
+
         const venta = new VentaModel({
             cliente: req.body.cliente,
             total: req.body.total,
@@ -33,30 +38,63 @@ router.post('/new_venta', async(req, res) => {
             fecha: req.body.fecha,
             activo:0
         });
-        const createdVenta = await venta.save();
-        res.status(201).json(createdVenta);
+        //--- New Venta ---//
+        const createdVenta = await venta.save().then(async () => {
+            //--- Historial de operaciones ---//
+            const historial = new HistorialOperacionModel({
+                operacion: 4,
+                tipo_operacion: 1,
+                user: userLogin
+            })
+            await historial.save().then(()=>{
+                res.status(201).json(createdVenta);
+            })
+        })
     } catch (error) {
         res.status(500).json({ message: error })
     }
 });
 
 //--- Actualizacion de una venta ---//
-router.put('/:venta_id', checkAuth, (req, res) => {
+router.put('/:venta_id', checkAuth, userLog, (req, res) => {
+    //--- User Logeado ---//
+    var userLogin = res.userlog
+    //--- Update Venta ---//
     VentaModel.updateMany({ _id: req.params.venta_id }, { $set: req.body }).exec()
-        .then(() => {
-            res.json(req.body)
-        }).catch(err => {
-            res.json({ message: err })
+    .then(async () => {
+        //--- Historial Operaciones ---//
+        const historial = new HistorialOperacionModel({
+            operacion: 4,
+            tipo_operacion: 2,
+            user: userLogin
         })
+        await historial.save().then(()=>{
+            res.json(req.body)
+        })
+    }).catch(err => {
+        res.json({ message: err })
+    })
 });
 
 //--- Borrado de una venta ---//
-router.delete('/:ventaID', checkAuth, async(req, res) => {
+router.delete('/:ventaID', checkAuth, userLog, async(req, res) => {
     try {
-        const deletedVenta = await VentaModel.deleteOne({ _id: req.params.ventaID })
-        res.status(200).json({
-            message: 'Venta been deleted ...',
-            data: deletedVenta,
+        //--- User Logeado ---//
+        var userLogin = res.userlog
+        //--- Delete Venta ---//
+        await VentaModel.deleteOne({ _id: req.params.ventaID }).then(async () => {
+            //--- Historial de operaciones ---//
+            const historial = new HistorialOperacionModel({
+                operacion: 4,
+                tipo_operacion: 3,
+                user: userLogin
+            })
+            await historial.save().then(()=>{
+                res.status(200).json({
+                    message: 'Venta been deleted ...',
+                    data: historial,
+                })
+            })
         })
     } catch (error) {
         res.status(500).json({ message: error })
