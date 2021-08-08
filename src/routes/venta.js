@@ -46,9 +46,8 @@ router.post('/new_venta', checkAuth, userLog, async(req, res) => {
                 tipo_operacion: 1,
                 user: userLogin
             })
-            await historial.save().then(()=>{
-                res.status(201).json(createdVenta);
-            })
+            await historial.save()
+            res.status(201).json(createdVenta);
         })
     } catch (error) {
         res.status(500).json({ message: error })
@@ -68,9 +67,8 @@ router.put('/:venta_id', checkAuth, userLog, (req, res) => {
             tipo_operacion: 2,
             user: userLogin
         })
-        await historial.save().then(()=>{
-            res.json(req.body)
-        })
+        await historial.save()
+        res.json(req.body)
     }).catch(err => {
         res.json({ message: err })
     })
