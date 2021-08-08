@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment')
 
 const UsuarioSchema = mongoose.Schema({
     apellido: String,
@@ -16,5 +17,8 @@ const UsuarioSchema = mongoose.Schema({
     rol: Array,
     created: { type: Date, default: Date.now }
 })
+
+autoIncrement.initialize(mongoose.connection)
+UsuarioSchema.plugin(autoIncrement.plugin, 'usuarios')
 
 module.exports = mongoose.model('usuarios', UsuarioSchema);

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment')
 
 const VentaDetalleSchema = mongoose.Schema({
     producto: { type: Array, required: true },
@@ -9,5 +10,8 @@ const VentaDetalleSchema = mongoose.Schema({
     idVenta: { type: String, required: true },
     created: { type: Date, default: Date.now }
 })
+
+autoIncrement.initialize(mongoose.connection)
+VentaDetalleSchema.plugin(autoIncrement.plugin, 'ventas_detalle')
 
 module.exports = mongoose.model('ventas_detalle', VentaDetalleSchema);

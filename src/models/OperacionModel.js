@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment')
 
 const OperacionSchema = mongoose.Schema({
     idOperacion: { type: Number, required: true },
@@ -6,5 +7,7 @@ const OperacionSchema = mongoose.Schema({
     created: { type: Date, default: Date.now }
 });
 
+autoIncrement.initialize(mongoose.connection)
+OperacionSchema.plugin(autoIncrement.plugin, 'operaciones')
 
 module.exports = mongoose.model('operaciones', OperacionSchema);

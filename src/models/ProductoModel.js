@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {appConfig} = require('../../config');
+var autoIncrement = require('mongoose-auto-increment')
 
 const ProductoSchema = mongoose.Schema({
     nombre: String,
@@ -14,6 +15,9 @@ const ProductoSchema = mongoose.Schema({
     imgUrl: String,
     created: { type: Date, default: Date.now }
 })
+
+autoIncrement.initialize(mongoose.connection)
+ProductoSchema.plugin(autoIncrement.plugin, 'productos')
 
 module.exports = mongoose.model('productos', ProductoSchema);
 

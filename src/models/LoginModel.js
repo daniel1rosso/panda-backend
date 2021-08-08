@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment')
 
 const LoginSchema = mongoose.Schema({
     user: { type: Array, required: true },

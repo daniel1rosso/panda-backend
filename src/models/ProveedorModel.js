@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment')
 
 const ProveedorSchema = mongoose.Schema({
     nombre_empresa: { type: String, required: true },
@@ -16,5 +17,8 @@ const ProveedorSchema = mongoose.Schema({
     activo: Number,
     created: { type: Date, default: Date.now }
 })
+
+autoIncrement.initialize(mongoose.connection)
+ProveedorSchema.plugin(autoIncrement.plugin, 'proveedores')
 
 module.exports = mongoose.model('proveedores', ProveedorSchema);
